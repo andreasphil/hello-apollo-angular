@@ -1,5 +1,7 @@
 # HelloApolloAngular
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5d35712b-2da0-47bf-be0b-897252ebdd9e/deploy-status)](https://app.netlify.com/sites/hello-apollo-angular/deploys)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
 
 ## Development server
