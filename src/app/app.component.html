@@ -1,28 +1,57 @@
-<h1>Hello apollo-angular!</h1>
+<main class="app">
+  <h1>Hello apollo-angular!</h1>
 
-loading: {{ isLoading }}<br />
-error: {{ hasGqlError ? "graphql" : "" }} {{ hasNetworkError ? "network" : ""
-}}<br />
+  <!-- TODO: Add some introduction here -->
 
-<label>
-  GitHub API token:
-  <input required [(ngModel)]="token" />
-</label>
+  <!-- Token form -->
+  <label class="token__label">
+    GitHub API token
+    <input class="token__input" required [(ngModel)]="token" />
+  </label>
 
-<br />
+  <!-- Error messages -->
+  <div *ngIf="hasError" class="message message--error">
+    Something went wrong with
+    {{ hasGqlError ? "the GraphQL query" : "the request" }} 🥵
+  </div>
 
-<button (click)="loadNext()" [disabled]="isLoading || !hasNext">
-  Load next
-</button>
+  <!-- Empty list state -->
+  <div
+    *ngIf="!hasData && !isLoading && !hasError"
+    class="message"
+  >
+    Nothing to show 😨
+  </div>
 
-<div *ngIf="!data?.length">Nothing to show</div>
-<ol *ngIf="data?.length">
-  <li *ngFor="let star of data">
-    <a
-      href="{{ star.node.url }}"
-      title="Show {{ star.node.nameWithOwner }} on GitHub"
-      target="_blank"
-      >{{ star.node.nameWithOwner }}</a
-    >: {{ star.node.description }}
-  </li>
-</ol>
+  <!-- List -->
+  <ol *ngIf="hasData" class="stars">
+    <li *ngFor="let star of data" class="star__wrapper">
+      <a
+        class="star"
+        target="_blank"
+        [href]="star.node.url"
+        [title]="'Visit ' + star.node.nameWithOwner + 'on GitHub'"
+      >
+          <span class="star__name">{{ star.node.nameWithOwner }}</span>
+          <span class="star__description">{{ star.node.description }}</span>
+      </a>
+    </li>
+  </ol>
+
+  <div *ngIf="!hasNext && !isLoading && !hasError" class="message">
+    You've reached the end of the list 🏁
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="message">
+    <span class="spinner">⌛️</span>
+  </div>
+
+  <button
+    *ngIf="!isLoading && hasNext"
+    class="button button--block"
+    (click)="loadNext()"
+  >
+    Load next
+  </button>
+</main>

@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'normalize.css';
+
+:root {
+  --border-radius: .25rem;
+  --font-size-small: 0.875rem;
+
+  /* https://colorhunt.co/palette/124846 */
+  --gray-10: #f7f7f7;
+  --gray-20: #5c636e;
+  --gray-30: #393e46;
+  --primary: #f8b500;
+  --error: #ff4b0f;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  color: var(--gray-30);
+  font-family: -apple-system, sans-serif;
+}
